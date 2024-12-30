@@ -1,0 +1,145 @@
+
+
+
+
+{
+
+  "name": "studk-util" ,
+
+  "version": "0.0.0" ,
+
+  "license": "MIT",
+
+  "scripts": {
+
+    "prepublish": "npm run build-only && npm run test-only"
+
+    ,"build-package": "npm pack --dry-run --pack-destination=\"./dist/tbs/\""
+
+    ,"build-only": "npm run build-tsc"
+
+    ,"test-only": "npx mocha test/**/*js"
+
+    ,"installAllDeps": "npm install"
+
+    ,"build-tsc": "npx --package=typescript@5.6 -- tsc -b ./tsconfig.build.json"
+
+    , "run-gitrefnamegents": "npx tsx src/L/GitRefNameGen.ts"
+
+  }
+
+  ,"files": [
+    "/package.json"
+  , "/README*"
+  , "/COPYING*"
+  , "/*.md"
+  , "!/CONTRIBUTING*"
+  , "/dist/"
+  , "!/dist/tbs/"
+  , "!/dist/**/*.tsbuildinfo"
+  , "/src/"
+  ]
+
+  ,
+  "exports": {
+
+    "./package.json": "./package.json"
+
+    ,".": {
+      "types": "./src/main.ts",
+      "default": "./dist/main.js"
+    }
+
+    ,"./N": {
+      "types": {
+        "default"   : "./src/main4Node.ts"
+      },
+      "default"   : "./dist/main4Node.js"
+    }
+
+    , "./src/L/util-*": null
+    , "./src/L/util.js": null
+    , "./L/util-*": null
+    , "./L/util.*": null
+
+    , "./api/Immutable": {
+      "types"         :  "./src/L/Immutable.cjs" ,
+      "default"       : "./dist/L/Immutable.cjs"
+    }
+
+    , "./Immutable"                     : "./src/L/Immutable.cjs"
+    , "./GeneratorFunctionEnum"         : "./src/L/GeneratorFunctionEnum.cjs"
+
+    , "./L/Immutable"                   : "./src/L/Immutable.cjs"
+    , "./L/GeneratorFunctionEnum"       : "./src/L/GeneratorFunctionEnum.cjs"
+
+    , "./L/*.js": null
+    , "./L/*.ts": null
+    , "./L/*.cjs": {
+      "types": [
+        "./src/L/*.cjs"
+      , "./src/L/*.cts"
+      ],
+      "default": [
+        "./dist/L/*.cjs"
+      ]
+    }
+    , "./L/*": {
+      "types": [
+        "./src/L/*.js"
+      , "./src/L/*.cjs"
+      , "./src/L/*.ts"
+      , "./src/L/*.cts"
+      ],
+      "default": [
+        "./dist/L/*.js"
+      , "./dist/L/*.cjs"
+      ]
+    }
+
+    ,    "./src/*.cjs"   : { "types"     :   "./src/*.cjs"  , "default"   :   "./dist/*.cjs"   }
+    ,    "./src/*.ts"    : { "types"     :   "./src/*.ts"   , "default"   :   "./dist/*.js"    }
+    ,    "./src/*.tsx"   : { "types"     :   "./src/*.tsx"  , "default"   :   "./dist/*.js"    }
+
+    ,"./src/*": {
+      "types"     :  "./src/*" ,
+      "default"   : "./dist/*"
+    }
+
+  }
+
+  ,
+  "imports": {
+
+    "#studk-util/src/*": "./dist/*.js",
+
+    "#studk-util/*": "studk-util/*"
+
+  }
+
+  ,"dependencies": {
+
+    "core-js": "3.39.0"
+
+    ,"@types/lodash-es": "^4.17.12"
+
+    ,"@types/mocha": "10.0.10"
+
+    ,"immutable": "5.0.3"
+
+    ,"lodash": "4.17.21"
+
+    ,"@tsconfig/node18": "18.2.4"
+    ,"@tsconfig/node20": "20.1.4"
+
+    ,"@types/node": "20.11.17"
+
+    ,"mocha": "11.0.1"
+
+  }
+
+  ,"devDependencies": {
+
+  }
+
+}

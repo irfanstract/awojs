@@ -1,0 +1,29 @@
+
+/* moved into 'tsconfig.build.json' --- per https://stackoverflow.com/q/35470511 */
+{
+  "extends": "./tsconfig.json" ,
+
+  /* we got a lot of complaints "cannot write file a/s/d because it would overwrite input file" ; */
+  /*  for some reason `references` doesn't automatically get inherited ; */
+  /* only after adding 'project reference' to "./tsconfig.json" would the complaint go away; */
+  "references": [
+    // { "path": "./tsconfig.json", } ,
+  ] ,
+
+  "compilerOptions": {
+
+    "rootDir": "src" ,
+    "outDir": "dist",
+    "noEmit": false,
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+
+  } ,
+
+  /* per https://stackoverflow.com/q/35470511 focused at https://stackoverflow.com/a/60223923 */
+  /* see also https://stackoverflow.com/q/35470511 focused at https://stackoverflow.com/a/60223923 */
+  /* see also https://stackoverflow.com/q/60943069 focused at https://stackoverflow.com/a/61153019 */
+  "include": [
+    "src" ,
+  ],
+
+}
