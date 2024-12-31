@@ -13,10 +13,10 @@ name: Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 
 #
 
@@ -51,15 +51,26 @@ jobs:
 
           npm pack ./
 
-          # move the just-built tarballs into somewhere '.gitignore'd, probably 'dist'
-          mkdir -p dist/tbs
-          mv studk-util-*.tgz dist/tbs/pkg.tgz
+          # move the just-built tarballs this way
+          mkdir -p distCommitted/tbs
+          mv studk-util-*.tgz distCommitted/tbs/pkg.tgz
+
+          # Commit And Push To Branch "release"
+          git add distCommitted/tbs/pkg.tgz
+          git fetch origin release
+          git reset origin/release~0
+          git config user.email "ci@example"
+          git config user.name "Bot"
+          git commit --allow-empty -m "After Adding These Release Files"
+          git push origin "HEAD:refs/heads/release"
+
+          echo "Done."
 
       - name: Upload The Main Tarfile We Just Built
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: tgz
-          path: dist/tbs/pkg.tgz
+          path: distCommitted/tbs/pkg.tgz
 
 
 #
