@@ -1,0 +1,65 @@
+
+
+
+
+# note:
+# to change/amend the workflow title, be sure to change the 'name' below as well!
+# (GH)W Appears To Refuse Loading Actions When The Ver-Spec Uses Opaque "vN" Names; See "GH Actions Security Tightening".
+
+
+
+
+name: Release
+
+on:
+  workflow_dispatch:
+
+#
+
+# The Main Thing.
+# Note That (GH)W Appears To Refuse Loading Actions When The Ver-Spec Uses Opaque "vN" Names; See "GH Actions Security Tightening".
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # node-version: [14.x, 16.x, 18.x]
+        # node-version: [20.x, 21.x, 20.9 ]
+        # node-version: [20.x, 21.x, 22.x, 23.x ]
+        node-version: [22.x,  ]
+
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # 4.2.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # 4.0.4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Recreate The 'dist' Stuffs
+        run: |
+          npm ci
+
+          # above 'npm ci' alone is not enough.
+          # 'npm install' would also run 'prepublish' without (hopefully) doing any ver bumps of the depended pkg(s).
+          npm install
+
+          npm pack ./
+
+          # move the just-built tarballs into somewhere '.gitignore'd, probably 'dist'
+          mv studk-util-*.tgz dist/tbs/pkg.tgz
+
+      - name: Upload The Main Tarfile We Just Built
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: tgz
+          path: dist/tbs/pkg.tgz
+
+
+#
+
+
+
+
+
