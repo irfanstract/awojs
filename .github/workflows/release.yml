@@ -58,7 +58,7 @@ jobs:
           # Commit And Push To Branch "release"
           git add distCommitted/tbs/pkg.tgz
           git fetch origin release
-          git reset origin/release~0
+          git reset --soft origin/release~0
           git config user.email "ci@example"
           git config user.name "Bot"
           git commit --allow-empty -m "After Adding These Release Files"
