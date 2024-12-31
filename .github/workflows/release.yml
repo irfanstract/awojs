@@ -13,6 +13,10 @@ name: Release
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 #
 
@@ -48,6 +52,7 @@ jobs:
           npm pack ./
 
           # move the just-built tarballs into somewhere '.gitignore'd, probably 'dist'
+          mkdir -p dist/tbs
           mv studk-util-*.tgz dist/tbs/pkg.tgz
 
       - name: Upload The Main Tarfile We Just Built
