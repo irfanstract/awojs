@@ -28,7 +28,7 @@ runCmd(`git fetch origin main`) ;
 const {
   mkc = true,
   forceUpdateRemote: forcePushToRemoteMain = mkc ? true : false ,
-} = { mkc: true, forceUpdateRemote: false, };
+} = { mkc: true, forceUpdateRemote: true, };
 
 
 /**
