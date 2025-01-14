@@ -7,7 +7,10 @@
 
 
 
-module.exports = require('node:assert') ;
+module.exports = (
+  // require('node:assert')
+  require('assert')
+) ;
 
 
 
