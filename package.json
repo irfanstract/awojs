@@ -57,8 +57,6 @@
       "default"   : "./dist/main4Node.js"
     }
 
-    , "./src/L/util-*": null
-    , "./src/L/util.js": null
     , "./L/util-*": null
     , "./L/util.*": null
 
