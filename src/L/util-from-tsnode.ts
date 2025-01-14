@@ -6,7 +6,7 @@
 
 
 
-import "./utilGlobalConsoleAlwaysStderr" ;
+// import "./utilGlobalConsoleAlwaysStderr" ;
 
 export { yn, } from "./AnsiYesOrNoInput" ;
 
